@@ -26,12 +26,10 @@ def predict():
             return jsonify({'error': 'No file uploaded'}), 400
 
         file = request.files['file']
-
-        # Load the image
         image = Image.open(file)
 
         # Preprocess the image
-        processed_image = preprocess_image(image, target_size=(128, 128))  # Adjust size as per your model
+        processed_image = preprocess_image(image, target_size=(128, 128))
 
         # Make prediction
         prediction = model.predict(processed_image)
@@ -42,7 +40,6 @@ def predict():
         return jsonify({'prediction': class_name})
     
     except Exception as e:
-        # Handle exceptions and return an error message
         return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
